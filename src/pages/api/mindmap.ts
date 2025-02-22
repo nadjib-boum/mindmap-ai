@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import fs from "node:fs";
-import formidable from "formidable";
 import pdfUtil from "@/utils/pdf";
 import formUtil from "@/utils/form";
+import { isPDFValid } from "@/helpers";
 
 export const config = { api: { bodyParser: false } };
 
@@ -12,21 +11,39 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
     const files = await formUtil.readFiles(req)
 
-    if (files.length === 0) {
-      res.status(400).json({ message: "No File Uploaded" });
+    if (files.length === 0) return res.status(400).json({
+      status: "error",
+      error: {
+        message: "No file uploaded"
+      }
+    });
+
+    if (!isPDFValid (files[0])) {
+      return res.status(400).json({
+        status: "error",
+        error: {
+          message: "Invalid file type"
+        }
+      });
     }
 
-    const pdfFile = fs.readFileSync(files[0].filepath);
+    const content = await pdfUtil.parsePDF(files[0].filepath);
 
-    const content = pdfUtil.parsePDF(pdfFile);
-
-    console.log("content", content);
-
-    res.status(200).json({ message: "This is a POST request" });
+    res.status(200).json({
+      status: "success",
+      data: {
+        content
+      }
+    });
   
   } else {
   
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+    res.status(405).end({
+      status: "error",
+      error: {
+        message: `Invalid Request`
+      }
+    });
   
   }
 

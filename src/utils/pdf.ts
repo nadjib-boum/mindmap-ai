@@ -1,20 +1,18 @@
+import fs from "node:fs";
 import pdfParse from 'pdf-parse';
 
 class PDFUtil {
 
-  async parsePDF (buffer: Buffer<ArrayBufferLike>) {
+  // async parsePDF (buffer: Buffer<ArrayBufferLike>) {
+  async parsePDF (filepath: string) {
 
-    // const bytes = await file.arrayBuffer();
-
-    // const buffer = Buffer.from(bytes);
+    const buffer = fs.readFileSync(filepath);
     
     const data = await pdfParse(buffer);
 
-    console.log ("pdf data", data);
-
     const content = data.text;
     
-    return content;
+    return content.trim();
     
   }
 
