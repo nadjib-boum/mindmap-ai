@@ -1,72 +1,66 @@
 "use client";
 
 import { useEffect } from "react"
+import { Patrick_Hand } from "next/font/google";
 import Dropzone from "react-dropzone"
-import { Cloud, File } from "lucide-react"
+import { Upload } from "lucide-react"
 import Progress from "@/components/Progress"
 import MindmapLoading from "@/components/ConvertButton";
+import FileData from "@/components/FileData";
 import { useUpload } from "@/hooks/use-upload";
-import { getPDFContent } from "@/helpers";
+import ExalicUpload from "../../public/exalic_upload.svg"
 
-const UploadDropzone = () => {
+type UploadDropzoneProps = {
+  setFile: (file: File) => void;
+  isFileSet: boolean;
+}
+
+const headlineFont = Patrick_Hand({ weight: "400" });
+
+const UploadDropzone = ({ setFile, isFileSet }: UploadDropzoneProps) => {
+
+  if (isFileSet) return null;
   
   const {
     file,
     isUploading,
     isUploadDone,
+    mutation,
     handleUpload,
-    mutation
   } = useUpload();
+
+  const handleDrop = async (acceptedFiles: File[]) => {
+    if (acceptedFiles.length) await handleUpload(acceptedFiles[0]);
+    else console.warn ("No file uploaded");
+  }
 
   useEffect (() => {
 
-    console.log(mutation.data);
+    if (mutation.isSuccess) setFile (file!);
 
   }, [mutation.isSuccess])
 
   return (
     <Dropzone
       multiple={false}
-      onDrop={async (acceptedFiles) => {
-        
-        await handleUpload(acceptedFiles[0]);
-
-      }}>
+      // noClick={true}
+      onDrop={handleDrop}>
       {({ getRootProps, getInputProps }) => (
         <div
           {...getRootProps()}
-          className='h-full'>
+          className='w-[450px] h-[450px] cursor-pointer rounded-lg border-dashed border-gray-300'
+          id="dropzone">
           <div className='flex items-center justify-center h-full w-full'>
-            <div className='flex flex-col items-center justify-center w-full h-full cursor-pointer bg-gray-50 hover:bg-gray-100'>
-              <div className='flex flex-col items-center justify-center pt-5 pb-6'>
-                <Cloud className='h-6 w-6 text-zinc-500 mb-2' />
-                <p className='text-lg'>
-                  <span className='font-semibold'>
-                    Click to upload
-                  </span>
-                    or drag and drop
-                </p>
+            <div className='flex flex-col items-center justify-center'>
+              <div className="mb-6 text-center">
+              <span className={`text-5xl ${headlineFont.className}`}>Convert Boring Text To Beautiful Mindmaps</span>
               </div>
-
-              {file ? (
-                <div className='max-w-xs bg-white flex items-center overflow-hidden outline outline-[1px] outline-zinc-200 divide-x divide-zinc-200'>
-                  <div className='px-3 py-2 h-full grid place-items-center'>
-                    <File className='h-4 w-4 text-blue-500' />
-                  </div>
-                  <div className='px-3 py-2 h-full text-sm truncate'>
-                    {file.name}
-                  </div>
-                </div>
-              ) : null}
+              <Upload strokeWidth={1.5} size={75} className='text-gray-800' />
+              <img src={ExalicUpload.src} alt='upload arrow' className="relative left-32" width={270} />
+              { file ? <FileData file={file} /> : null}
               
               <div className='w-full mt-4 max-w-xs mx-auto'>
-                {
-                  isUploading ? <Progress /> : null
-                }
-                {
-                  (isUploadDone && !isUploading ) ? <MindmapLoading /> : null
-                }
-
+                { isUploading ? <Progress /> : ( isUploadDone ? <MindmapLoading /> : null ) }
               </div>
 
               <input
@@ -76,6 +70,7 @@ const UploadDropzone = () => {
                 className='hidden'
                 onChange={(event) => handleUpload (event.target.files?.length ? event.target.files[0] : null)}
               />
+              
             </div>
           </div>
         </div>

@@ -3,17 +3,22 @@ import pdfParse from 'pdf-parse';
 
 class PDFUtil {
 
-  // async parsePDF (buffer: Buffer<ArrayBufferLike>) {
-  async parsePDF (filepath: string) {
+  private async _parsePDF (filepath: string) {
 
     const buffer = fs.readFileSync(filepath);
     
     const data = await pdfParse(buffer);
 
-    const content = data.text;
+    return data;
     
-    return content.trim();
-    
+  }
+
+  async getPDFContent (filepath: string) {
+
+    const pdfData = await this._parsePDF(filepath);
+
+    return pdfData.text.trim();
+
   }
 
 }

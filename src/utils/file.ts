@@ -2,7 +2,7 @@ import formidable from "formidable";
 import type IncomingForm from "formidable/Formidable";
 import type { NextApiRequest } from "next";
 
-class FormUtil {
+class FileUtil {
 
   private form: IncomingForm;
 
@@ -30,6 +30,6 @@ class FormUtil {
 
 }
 
-const formUtil = new FormUtil();
+const fileUtil = new FileUtil();
 
-export default formUtil; 
+export default fileUtil; 

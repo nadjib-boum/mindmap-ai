@@ -1,6 +1,15 @@
-const MindmapCanvas = () => {
+
+type MindmapCanvasProps = {
+  file: File | null;
+}
+
+
+const MindmapCanvas = ({ file }: MindmapCanvasProps) => {
+
+  if (!file) return null;
+  
   return (
-    <div className="border border-gray-300 w-1/2 h-full">
+    <div className="border border-dashed border-gray-300 h-3/4 w-3/4">
       <h1>MindmapCanvas</h1>
     </div>
   );

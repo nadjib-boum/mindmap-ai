@@ -2,6 +2,16 @@ import { useState } from "react"
 import { useMutation } from "@tanstack/react-query";
 import { sleep } from "@/helpers";
 
+type SuccessAPIResponse<T = any> = {
+  status: "success";
+  data: T
+}
+
+type UploadResponse = SuccessAPIResponse<{
+  filepath: string;
+  content: string;
+}>
+
 export const useUpload = () => {
 
   const mutation = useMutation({
@@ -11,7 +21,7 @@ export const useUpload = () => {
         body: formData
       })
       const data = await res.json();
-      return data;
+      return data as UploadResponse;
     }
   });
   const [ file, setFile ] = useState<File | null>(null);

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import pdfUtil from "@/utils/pdf";
-import formUtil from "@/utils/form";
+import fileUtil from "@/utils/file";
 import { isPDFValid } from "@/helpers";
 
 export const config = { api: { bodyParser: false } };
@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   
   if (req.method === "POST") {
     
-    const files = await formUtil.readFiles(req)
+    const files = await fileUtil.readFiles(req)
 
     if (files.length === 0) return res.status(400).json({
       status: "error",
@@ -27,12 +27,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
     }
 
-    const content = await pdfUtil.parsePDF(files[0].filepath);
+    const filepath = files[0].filepath;
+
+    const content = await pdfUtil.getPDFContent(filepath);
 
     res.status(200).json({
       status: "success",
       data: {
-        content
+        content,
+        filepath,
       }
     });
   
