@@ -14,10 +14,13 @@
     "@radix-ui/react-toast": "^1.2.6",
     "@react-pdf/renderer": "^4.2.2",
     "@tanstack/react-query": "^5.66.8",
+    "@xyflow/react": "^12.4.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "elkjs": "^0.9.3",
     "formidable": "^3.5.2",
     "lucide-react": "^0.475.0",
+    "nanoid": "^5.1.2",
     "next": "15.1.7",
     "pdf-parse": "^1.1.1",
     "react": "^19.0.0",
@@ -25,7 +28,8 @@
     "react-dropzone": "^14.3.5",
     "react-pdf": "^9.2.1",
     "tailwind-merge": "^3.0.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "web-worker": "^1.5.0"
   },
   "devDependencies": {
     "@types/formidable": "^3.4.5",

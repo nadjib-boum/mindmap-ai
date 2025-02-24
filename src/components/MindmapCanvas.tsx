@@ -1,16 +1,17 @@
+import Mindmap from "@/components/Mindmap";
 
 type MindmapCanvasProps = {
-  file: File | null;
+  isFileSet: boolean;
 }
 
 
-const MindmapCanvas = ({ file }: MindmapCanvasProps) => {
+const MindmapCanvas = ({ isFileSet }: MindmapCanvasProps) => {
 
-  if (!file) return null;
+  if (!isFileSet) return null;
   
   return (
     <div className="border border-dashed border-gray-300 h-3/4 w-3/4">
-      <h1>MindmapCanvas</h1>
+      <Mindmap />
     </div>
   );
 }

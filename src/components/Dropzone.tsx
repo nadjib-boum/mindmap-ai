@@ -43,7 +43,6 @@ const UploadDropzone = ({ setFile, isFileSet }: UploadDropzoneProps) => {
   return (
     <Dropzone
       multiple={false}
-      // noClick={true}
       onDrop={handleDrop}>
       {({ getRootProps, getInputProps }) => (
         <div
@@ -52,13 +51,20 @@ const UploadDropzone = ({ setFile, isFileSet }: UploadDropzoneProps) => {
           id="dropzone">
           <div className='flex items-center justify-center h-full w-full'>
             <div className='flex flex-col items-center justify-center'>
-              <div className="mb-6 text-center">
-              <span className={`text-5xl ${headlineFont.className}`}>Convert Boring Text To Beautiful Mindmaps</span>
-              </div>
-              <Upload strokeWidth={1.5} size={75} className='text-gray-800' />
-              <img src={ExalicUpload.src} alt='upload arrow' className="relative left-32" width={270} />
-              { file ? <FileData file={file} /> : null}
+
+              {
+                !(isUploading || isUploadDone) &&
+                  <>
+                    <div className="mb-6 text-center">
+                      <span className={`text-5xl ${headlineFont.className}`}>Convert Boring Text To Beautiful Mindmaps</span>
+                    </div>
+                    <Upload strokeWidth={1.5} size={75} className='text-gray-800' />
+                    <img src={ExalicUpload.src} alt='upload arrow' className="relative left-32" width={270} />
+                  </>
+              }
               
+              { file ? <FileData file={file} /> : null}
+
               <div className='w-full mt-4 max-w-xs mx-auto'>
                 { isUploading ? <Progress /> : ( isUploadDone ? <MindmapLoading /> : null ) }
               </div>

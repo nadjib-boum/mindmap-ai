@@ -1,0 +1,42 @@
+import { useCallback } from 'react';
+import { applyEdgeChanges, applyNodeChanges, Background, Controls, ReactFlow } from '@xyflow/react';
+import { useFlowLayout } from '@/hooks/use-flow-layout';
+import { formatTreeContent } from '@/helpers';
+import { contentSample, treeSample } from '@/data/tree';
+import '@xyflow/react/dist/style.css';
+
+type MindmapProps = {
+
+}
+
+const { nodes: nodes_, edges: edges_ } = formatTreeContent (treeSample);
+
+const Mindmap = ({}: MindmapProps) => {
+
+  const {
+    nodes,
+    setNodes,
+    edges,
+    setEdges,
+  } = useFlowLayout ({ nodes: nodes_, edges: edges_ });
+
+  const onNodesChange = useCallback ((changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)), []);
+  const onEdgesChange = useCallback ((changes: any) => setEdges((eds) => applyEdgeChanges(changes, eds)), []);
+
+  return (
+    <div className='h-full w-full'>
+      <ReactFlow
+        nodes={nodes}
+        onNodesChange={onNodesChange}
+        edges={edges}
+        onEdgesChange={onEdgesChange}
+      >
+        <Background />
+        <Controls />
+      </ReactFlow>
+    </div>
+  );
+
+}
+
+export default Mindmap;
