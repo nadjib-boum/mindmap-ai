@@ -9,12 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^1.1.14",
     "@radix-ui/react-progress": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.2",
     "@radix-ui/react-toast": "^1.2.6",
     "@react-pdf/renderer": "^4.2.2",
     "@tanstack/react-query": "^5.66.8",
     "@xyflow/react": "^12.4.3",
+    "ai": "^4.1.46",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "elkjs": "^0.9.3",

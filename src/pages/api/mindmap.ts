@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import pdfUtil from "@/utils/pdf";
 import fileUtil from "@/utils/file";
+import pdfUtil from "@/utils/pdf";
+import aiUtil from "@/utils/ai";
 import { isPDFValid } from "@/helpers";
+import { mindmapSample } from "@/data";
 
 export const config = { api: { bodyParser: false } };
 
@@ -29,12 +31,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const filepath = files[0].filepath;
 
-    const content = await pdfUtil.getPDFContent(filepath);
+    // const content = await pdfUtil.getPDFContent(filepath);
+
+    // const text = await aiUtil.convertPDFtoStructuredText (content);
+
+    // const mindmap = await aiUtil.convertTextToMindmap (text);
+
+    const mindmap = mindmapSample;
 
     res.status(200).json({
       status: "success",
       data: {
-        content,
+        mindmap
       }
     });
   

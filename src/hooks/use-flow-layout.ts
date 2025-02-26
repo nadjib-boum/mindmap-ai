@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { layoutMindmap } from "@/helpers";
 import type { Edge, Node } from "@xyflow/react";
+import layoutUtil from "@/utils/layout";
 
 type UseFlowLayoutParams = {
   nodes: Node[];
@@ -17,7 +17,7 @@ export const useFlowLayout = (params: UseFlowLayoutParams) => {
 
     (async () => {
 
-      const { nodes: layoutedNodes, edges: layoutEdges } = await layoutMindmap (nodes, edges); 
+      const { nodes: layoutedNodes, edges: layoutEdges } = await layoutUtil.layoutMindmap (nodes, edges); 
 
       setNodes(layoutedNodes);
       setEdges(layoutEdges);

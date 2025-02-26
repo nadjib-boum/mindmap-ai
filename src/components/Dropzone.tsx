@@ -7,19 +7,20 @@ import { Upload } from "lucide-react"
 import Progress from "@/components/Progress"
 import MindmapLoading from "@/components/ConvertButton";
 import FileData from "@/components/FileData";
+import AutoType from "@/components/AutoType";
 import { useUpload } from "@/hooks/use-upload";
 import ExalicUpload from "../../public/exalic_upload.svg"
 
 type UploadDropzoneProps = {
-  setFile: (file: File) => void;
-  isFileSet: boolean;
+  setMindmap: (input: any) => void;
+  mindmap: any;
 }
 
 const headlineFont = Patrick_Hand({ weight: "400" });
 
-const UploadDropzone = ({ setFile, isFileSet }: UploadDropzoneProps) => {
+const UploadDropzone = ({ setMindmap, mindmap }: UploadDropzoneProps) => {
 
-  if (isFileSet) return null;
+  if (mindmap) return null;
   
   const {
     file,
@@ -36,7 +37,9 @@ const UploadDropzone = ({ setFile, isFileSet }: UploadDropzoneProps) => {
 
   useEffect (() => {
 
-    if (mutation.isSuccess) setFile (file!);
+    if (mutation.isSuccess) {
+      setMindmap (mutation.data.data.mindmap)
+    }
 
   }, [mutation.isSuccess])
 
@@ -47,7 +50,7 @@ const UploadDropzone = ({ setFile, isFileSet }: UploadDropzoneProps) => {
       {({ getRootProps, getInputProps }) => (
         <div
           {...getRootProps()}
-          className='w-[450px] h-[450px] cursor-pointer rounded-lg border-dashed border-gray-300'
+          className='w-[500px] h-[500px] cursor-pointer rounded-lg border-dashed border-gray-300'
           id="dropzone">
           <div className='flex items-center justify-center h-full w-full'>
             <div className='flex flex-col items-center justify-center'>
@@ -55,17 +58,20 @@ const UploadDropzone = ({ setFile, isFileSet }: UploadDropzoneProps) => {
               {
                 !(isUploading || isUploadDone) &&
                   <>
-                    <div className="mb-6 text-center">
-                      <span className={`text-5xl ${headlineFont.className}`}>Convert Boring Text To Beautiful Mindmaps</span>
+
+                    <div className={`mb-8 text-center text-6xl ${headlineFont.className}`}>
+                      <AutoType text={"Convert Boring Text To Beautiful Mindmaps"} />
                     </div>
-                    <Upload strokeWidth={1.5} size={75} className='text-gray-800' />
+
+                    <Upload strokeWidth={1.5} size={48} className='text-gray-500 transition-colors duration-200 hover:text-gray-950 ' />
                     <img src={ExalicUpload.src} alt='upload arrow' className="relative left-32" width={270} />
+                    
                   </>
               }
-              
+
               { file ? <FileData file={file} /> : null}
 
-              <div className='w-full mt-4 max-w-xs mx-auto'>
+              <div className='w-[200px] mt-4 max-w-xs mx-auto'>
                 { isUploading ? <Progress /> : ( isUploadDone ? <MindmapLoading /> : null ) }
               </div>
 

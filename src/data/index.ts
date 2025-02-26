@@ -271,41 +271,183 @@ export const contentSample = {
   ]
 }
 
-export const treeSample = {
-  id: "1",
-  data: {
-    label: "Root"
+export const mindmapSample = {
+  "id": "1",
+  "data": {
+    "label": "Donald Trump Biography"
   },
-  children: [
+  // "className": "react-flow__root-node",
+  "children": [
     {
-      id: "2",
-      data: {
-        label: "Child 1",
+      "id": "2",
+      "data": {
+        "label": "Personal Information"
       },
-      children: [
+      "children": [
         {
-          id: "4",
-          data: {
-            label: "Grandchild 1",
+          "id": "3",
+          "data": {
+            "label": "Full Name"
           },
-          children: []
+          "children": []
+        },
+        {
+          "id": "4",
+          "data": {
+            "label": "Date of Birth"
+          },
+          "children": []
+        },
+        {
+          "id": "5",
+          "data": {
+            "label": "Nationality"
+          },
+          "children": []
         }
       ]
     },
     {
-      id: "3",
-      data: {
-        label: "Child 2",
+      "id": "6",
+      "data": {
+        "label": "Career Overview"
       },
-      children: [
+      "children": [
         {
-          id: "5",
-          data: {
-            label: "Grandchild 2",
+          "id": "7",
+          "data": {
+            "label": "Businessman"
           },
-          children: []
+          "children": []
+        },
+        {
+          "id": "8",
+          "data": {
+            "label": "Media Personality"
+          },
+          "children": []
+        },
+        {
+          "id": "9",
+          "data": {
+            "label": "Politician"
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "data": {
+        "label": "Presidential Tenure (2017-2021)"
+      },
+      "children": [
+        {
+          "id": "11",
+          "data": {
+            "label": "Key Focus Areas"
+          },
+          "children": [
+            {
+              "id": "12",
+              "data": {
+                "label": "Tax cuts"
+              },
+              "children": []
+            },
+            {
+              "id": "13",
+              "data": {
+                "label": "Deregulation"
+              },
+              "children": []
+            },
+            {
+              "id": "14",
+              "data": {
+                "label": "Conservative judicial appointments"
+              },
+              "children": []
+            },
+            {
+              "id": "15",
+              "data": {
+                "label": "\"America First\" foreign policy approach"
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "16",
+          "data": {
+            "label": "Controversies"
+          },
+          "children": [
+            {
+              "id": "17",
+              "data": {
+                "label": "Two impeachments"
+              },
+              "children": []
+            },
+            {
+              "id": "18",
+              "data": {
+                "label": "Deeply polarized political landscape"
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "19",
+      "data": {
+        "label": "Post-Presidency"
+      },
+      "children": [
+        {
+          "id": "20",
+          "data": {
+            "label": "2020 Election"
+          },
+          "children": []
+        },
+        {
+          "id": "21",
+          "data": {
+            "label": "Political Influence"
+          },
+          "children": [
+            {
+              "id": "22",
+              "data": {
+                "label": "Remained a dominant force in the Republican Party"
+              },
+              "children": []
+            },
+            {
+              "id": "23",
+              "data": {
+                "label": "Continued to shape conservative politics"
+              },
+              "children": []
+            },
+            {
+              "id": "24",
+              "data": {
+                "label": "Pursuing a comeback in the 2024 presidential race"
+              },
+              "children": []
+            }
+          ]
         }
       ]
     }
   ]
-};
+}
+
+export const colors = ["#FBF3B9", "#FFDCCC", "#FDB7EA", "#FFDFEF", "#B7B1F2", "#EABDE6", "#D69ADE", "#AA60C8", "#C5BAFF", "#C4D9FF"]
+ 

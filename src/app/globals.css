@@ -64,6 +64,14 @@
     @apply bg-background text-foreground;
   }
 }
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
 
 .progress-animate {
   height: 5px;
@@ -83,6 +91,11 @@
   animation: progress 1.5s ease-in-out forwards;
 }
 
+.fade-in {
+  opacity: 0;
+  animation: fadeIn .2s ease var(--delay, 0) forwards;
+}
+
 @keyframes progress {
   0% {
     width: 0;
@@ -92,13 +105,11 @@
   }
 }
 
-
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  body {
-    @apply bg-background text-foreground;
+  100% {
+    opacity: 1;
   }
 }

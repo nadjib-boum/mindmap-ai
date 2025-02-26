@@ -6,13 +6,13 @@ import MindmapCanvas from "@/components/MindmapCanvas";
 
 export default function Home() {
 
-  const [file, setFile] = useState<File | null>(null);
+  const [mindmap, setMindmap] = useState<any>(null);
 
   return (
     <div id="app" className="h-screen w-full " style={{ backgroundColor: "#f9f9f9" }}>
       <div className="h-full w-full flex justify-center items-center">
-        <UploadDropzone setFile={setFile} isFileSet={!!file} />
-        <MindmapCanvas isFileSet={!!file} />
+        <UploadDropzone setMindmap={setMindmap} mindmap={mindmap} />
+        <MindmapCanvas mindmap={mindmap} />
       </div>
     </div>
   );

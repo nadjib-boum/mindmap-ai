@@ -1,17 +1,19 @@
 import Mindmap from "@/components/Mindmap";
 
 type MindmapCanvasProps = {
-  isFileSet: boolean;
+  mindmap: any;
 }
 
 
-const MindmapCanvas = ({ isFileSet }: MindmapCanvasProps) => {
+const MindmapCanvas = ({ mindmap }: MindmapCanvasProps) => {
 
-  if (!isFileSet) return null;
+  console.log ("mindmap", mindmap)
+
+  if (!mindmap) return null;
   
   return (
-    <div className="border border-dashed border-gray-300 h-3/4 w-3/4">
-      <Mindmap />
+    <div className="border border-dashed border-gray-300 h-full w-full">
+      <Mindmap mindmap={mindmap} />
     </div>
   );
 }

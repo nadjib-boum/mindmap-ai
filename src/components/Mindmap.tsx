@@ -1,17 +1,17 @@
 import { useCallback } from 'react';
-import { applyEdgeChanges, applyNodeChanges, Background, Controls, ReactFlow } from '@xyflow/react';
+import { ReactFlow , Background, Controls, MiniMap, applyEdgeChanges, applyNodeChanges,} from '@xyflow/react';
+import { SineEdge } from '@/components/SineEdge';
 import { useFlowLayout } from '@/hooks/use-flow-layout';
 import { formatTreeContent } from '@/helpers';
-import { contentSample, treeSample } from '@/data/tree';
 import '@xyflow/react/dist/style.css';
 
 type MindmapProps = {
-
+  mindmap: any;
 }
 
-const { nodes: nodes_, edges: edges_ } = formatTreeContent (treeSample);
+const Mindmap = ({ mindmap }: MindmapProps) => {
 
-const Mindmap = ({}: MindmapProps) => {
+  const { nodes: nodes_, edges: edges_ }  = formatTreeContent(mindmap);
 
   const {
     nodes,
@@ -30,9 +30,11 @@ const Mindmap = ({}: MindmapProps) => {
         onNodesChange={onNodesChange}
         edges={edges}
         onEdgesChange={onEdgesChange}
+        edgeTypes={{ sine: SineEdge }}
       >
         <Background />
         <Controls />
+        <MiniMap className='border-2 border-gray-900' />
       </ReactFlow>
     </div>
   );

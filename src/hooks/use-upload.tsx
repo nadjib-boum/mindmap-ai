@@ -8,8 +8,7 @@ type SuccessAPIResponse<T = any> = {
 }
 
 type UploadResponse = SuccessAPIResponse<{
-  filepath: string;
-  content: string;
+  mindmap: string;
 }>
 
 export const useUpload = () => {
