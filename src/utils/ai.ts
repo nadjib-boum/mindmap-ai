@@ -24,7 +24,7 @@ class AIUtil {
 
   }
 
-  public async convertPDFtoStructuredText (pdfContent: string) {
+  private async convertTextToStructured (pdfContent: string) {
 
     const text = await this.generateAnswer ({
       system: `
@@ -36,13 +36,22 @@ class AIUtil {
         `,
         prompt: `Convert This Text To structured Text: ${pdfContent}`
       });
-      // - Under each heading, list key points in a hierarchical bullet format.
 
     return text;
 
   }
 
+  private parseMindmapTree (treeStr: string) {
+
+    // return treeStr;
+
+    return JSON.parse(treeStr.replaceAll("\n", ""));
+
+  }
+
   public async convertTextToMindmap (text: string) {
+
+    const structured = await this.convertTextToStructured (text);
 
     const tree = await this.generateAnswer ({
       system: `
@@ -77,11 +86,12 @@ class AIUtil {
         Ensure the IDs are numeric and unique.
         Return the structure directly without instros or endigns, just raw code. this is a MUST to not corrupt the code.
         Ensure That The returned Javascript Is Parsable without issues
+        Use this character (") instead of this (') to quote javascript keys and strings
         `,
-      prompt: `Convert This Text To Structured Object: ${text}`
+      prompt: `Convert This Text To Structured Object: ${structured}`
     });
 
-    return JSON.parse(tree.replaceAll("\n", ""));
+    return this.parseMindmapTree (tree);
 
   }
 

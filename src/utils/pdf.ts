@@ -1,4 +1,4 @@
-import fs from "node:fs";
+import fs from "fs";
 import pdfParse from 'pdf-parse';
 
 class PDFUtil {

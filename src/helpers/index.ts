@@ -1,4 +1,4 @@
-import path from "node:path";
+import path from "path";
 import formidable from "formidable";
 import { colors } from "@/data";
 import type { Node, Edge } from "@xyflow/react";

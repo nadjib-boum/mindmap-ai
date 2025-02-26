@@ -3,11 +3,11 @@
 import { useEffect } from "react"
 import { Patrick_Hand } from "next/font/google";
 import Dropzone from "react-dropzone"
-import { Upload } from "lucide-react"
 import Progress from "@/components/Progress"
 import MindmapLoading from "@/components/ConvertButton";
 import FileData from "@/components/FileData";
 import AutoType from "@/components/AutoType";
+import UploadButton from "@/components/UploadButton";
 import { useUpload } from "@/hooks/use-upload";
 import ExalicUpload from "../../public/exalic_upload.svg"
 
@@ -16,7 +16,7 @@ type UploadDropzoneProps = {
   mindmap: any;
 }
 
-const headlineFont = Patrick_Hand({ weight: "400" });
+const headlineFont = Patrick_Hand({ weight: "400", subsets: ["latin"] });
 
 const UploadDropzone = ({ setMindmap, mindmap }: UploadDropzoneProps) => {
 
@@ -38,6 +38,7 @@ const UploadDropzone = ({ setMindmap, mindmap }: UploadDropzoneProps) => {
   useEffect (() => {
 
     if (mutation.isSuccess) {
+      console.log(mutation.data.data.mindmap)
       setMindmap (mutation.data.data.mindmap)
     }
 
@@ -63,7 +64,7 @@ const UploadDropzone = ({ setMindmap, mindmap }: UploadDropzoneProps) => {
                       <AutoType text={"Convert Boring Text To Beautiful Mindmaps"} />
                     </div>
 
-                    <Upload strokeWidth={1.5} size={48} className='text-gray-500 transition-colors duration-200 hover:text-gray-950 ' />
+                    <UploadButton />
                     <img src={ExalicUpload.src} alt='upload arrow' className="relative left-32" width={270} />
                     
                   </>

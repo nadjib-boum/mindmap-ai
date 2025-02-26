@@ -1,4 +1,4 @@
-import ELK from "elkjs";
+import ELK, { type ElkNode } from "elkjs";
 import type { Node, Edge } from "@xyflow/react";
 
 class LayoutUtil {
@@ -11,12 +11,11 @@ class LayoutUtil {
 
   layoutMindmap = async (nodes: Node[], edges: Edge[]) => {
   
-    const graph = {
+    const graph: ElkNode = {
       id: "root",
       layoutOptions: {
-        // "elk.algorithm": "mrtree",
-        // "elk.direction": "DOWN",
-        'elk.algorithm': 'org.eclipse.elk.radial',
+        'elk.algorithm': 'org.eclipse.elk.mrtree',
+        'elk.direction':'DOWN',
       },
       children: nodes.map((node) => ({
         id: String(node.id),
